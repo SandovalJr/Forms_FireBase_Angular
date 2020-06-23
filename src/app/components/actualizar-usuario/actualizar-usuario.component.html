@@ -1,6 +1,6 @@
 <div class="container">
   <div class="jumbotron">
-    <h1 class="text-center">Registro de Usuario</h1>
+    <h1 class="text-center">Actualizar Usuario</h1>
     <div>Rellene todos los datos marcados como obligatorios*</div>
     <div class="row">
       <ng-container [formGroup]="formulario">
@@ -276,7 +276,7 @@
         <button
           type="button"
           class="btn btn-outline-info btn-block"
-          (click)="GuardarUsuario()"
+
           [disabled]="formulario.invalid"
         >
           Guardar Usuario

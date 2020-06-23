@@ -8,24 +8,40 @@ import { MessageErrorsService } from '../../services/message-errors.service';
 import { CountryService } from '../../services/country.service';
 import { UserDatabaseService } from 'src/app/services/user-database.service';
 import { Usuario } from 'src/app/interface/user.interface';
+import { ActivatedRoute } from '@angular/router';
+import { pluck, switchMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-formulario',
-  templateUrl: './formulario.component.html',
-  styleUrls: ['./formulario.component.css'],
+  selector: 'app-actualizar-usuario',
+  templateUrl: './actualizar-usuario.component.html',
+  styleUrls: ['./actualizar-usuario.component.css'],
 })
-export class FormularioComponent implements OnInit {
+export class ActualizarUsuarioComponent implements OnInit {
   public formulario: FormGroup;
+  public usuarioRecibido: any;
   public countriesName: Array<string> = [];
 
+  private loading: boolean;
   constructor(
     private msgError: MessageErrorsService,
-    private countryService: CountryService,
-    private UserDB: UserDatabaseService
+    private AR: ActivatedRoute,
+    private UsuarioDB: UserDatabaseService
   ) {
-    this.countryService
-      .GetCountry()
-      .subscribe((country) => this.countriesName.push(country));
+    this.loading = true;
+    this.AR.params
+      .pipe(
+        pluck('id'),
+        switchMap((idUsuario) =>
+          this.UsuarioDB.ObtenerUsuarioActualizar(idUsuario)
+        )
+      )
+      .subscribe((usuario:any) => {
+        this.usuarioRecibido = usuario[0];
+        this.formulario.patchValue(this.usuarioRecibido);
+        this.loading = false;
+        console.log(this.usuarioRecibido);
+
+      });
   }
 
   ngOnInit(): void {
@@ -109,16 +125,5 @@ export class FormularioComponent implements OnInit {
     }
 
     return this.msgError.messageError(this.formulario.controls[control].errors);
-  }
-
-  public GuardarUsuario() {
-    if (!this.formulario.valid) {
-      alert('form invalido');
-      return;
-    }
-
-    const Usuario: Usuario = this.formulario.value;
-    console.log(Usuario);
-    this.UserDB.GuardarUsuario(Usuario);
   }
 }

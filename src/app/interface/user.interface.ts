@@ -1,17 +1,17 @@
 export interface Usuario {
-  nickname: string;
+  name: string;
   email: string;
-  contrasena: string;
-  nombreCompleto: string;
-  RFC: string;
+  password: string;
+  nameComplete: string;
+  rfc: string;
   telefono: string;
   direccion: string;
-  numero: number;
+  numeroCasa: number;
   esc?: number;
   piso?: number;
   letra?: number;
-  codigoPostal: string;
+  cp: string;
   localidad: string;
   provincia: string;
-  pais: string;
+  country: string;
 }

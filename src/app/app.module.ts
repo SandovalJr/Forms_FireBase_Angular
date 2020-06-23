@@ -9,9 +9,16 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-
+import { VerUsuariosComponent } from './components/ver-usuarios/ver-usuarios.component';
+import { ActualizarUsuarioComponent } from './components/actualizar-usuario/actualizar-usuario.component';
+import { app_routes } from './app.routes';
 @NgModule({
-  declarations: [AppComponent, FormularioComponent],
+  declarations: [
+    AppComponent,
+    FormularioComponent,
+    VerUsuariosComponent,
+    ActualizarUsuarioComponent,
+  ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
@@ -19,6 +26,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     RxReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireModule,
+    app_routes,
   ],
   providers: [],
   bootstrap: [AppComponent],
