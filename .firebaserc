@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "clienteregistro-ff848": {
+      "hosting": {
+        "FormFirebase": [
+          "clienteregistro-ff848"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,285 @@
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="text-center">Registro de Usuario</h1>
+    <div>Rellene todos los datos marcados como obligatorios*</div>
+    <div class="row">
+      <ng-container [formGroup]="formulario">
+        <div class="col-12 mt-3">
+          <h3>Datos de Registro</h3>
+          <div class="col-12 form-group">
+            <label for="">Nombre de Usuario*</label>
+            <input
+              type="text"
+              class="form-control"
+              [ngClass]="{
+                'is-valid': ValidarForm('name').error == false,
+                'is-invalid': ValidarForm('name').error == true
+              }"
+              formControlName="name"
+            />
+            <div
+              *ngIf="ValidarForm('name').error"
+              class="invalid-feedback d-block"
+            >
+              {{ ValidarForm("name").message }}
+            </div>
+          </div>
+          <div class="col-12 form-group">
+            <label for="">Direccion de Email*</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="email"
+              [ngClass]="{
+                'is-valid': ValidarForm('email').error == false,
+                'is-invalid': ValidarForm('email').error == true
+              }"
+            />
+            <div
+              *ngIf="ValidarForm('email').error"
+              class="invalid-feedback d-block"
+            >
+              {{ ValidarForm("email").message }}
+            </div>
+          </div>
+          <div class="col-12 form-group">
+            <label for="">Contraseña*</label>
+            <input
+              type="password"
+              class="form-control"
+              formControlName="password"
+              [ngClass]="{
+                'is-valid': ValidarForm('password').error == false,
+                'is-invalid': ValidarForm('password').error == true
+              }"
+            />
+            <div
+              *ngIf="ValidarForm('password').error"
+              class="invalid-feedback d-block"
+            >
+              {{ ValidarForm("password").message }}
+            </div>
+          </div>
+          <div class="col-12 form-group">
+            <label for="">Contraseña (Otra vez)*</label>
+            <input
+              type="password"
+              class="form-control"
+              formControlName="repeatPsw"
+              [ngClass]="{
+                'is-valid': ValidarForm('repeatPsw').error == false,
+                'is-invalid': ValidarForm('repeatPsw').error == true
+              }"
+            />
+            <div
+              *ngIf="ValidarForm('repeatPsw').error"
+              class="invalid-feedback d-block"
+            >
+              {{ ValidarForm("repeatPsw").message }}
+            </div>
+          </div>
+        </div>
+        <div class="col-12 mt-3">
+          <h3>Datos Personales</h3>
+          <div class="col-12 form-group">
+            <label for="">Nombre y Apellidos*</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="nameComplete"
+              [ngClass]="{
+                'is-valid': ValidarForm('nameComplete').error == false,
+                'is-invalid': ValidarForm('nameComplete').error == true
+              }"
+            />
+            <div
+              *ngIf="ValidarForm('nameComplete').error"
+              class="invalid-feedback d-block"
+            >
+              {{ ValidarForm("nameComplete").message }}
+            </div>
+          </div>
+          <div class="col-12 form-group">
+            <label for="">RFC</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="rfc"
+              [ngClass]="{
+                'is-valid': ValidarForm('rfc').error == false,
+                'is-invalid': ValidarForm('rfc').error == true
+              }"
+            />
+            <div
+              *ngIf="ValidarForm('rfc').error"
+              class="invalid-feedback d-block"
+            >
+              {{ ValidarForm("rfc").message }}
+            </div>
+          </div>
+          <div class="col-12 form-group">
+            <label for="">Telefono de Contacto*</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="telefono"
+              [ngClass]="{
+                'is-valid': ValidarForm('telefono').error == false,
+                'is-invalid': ValidarForm('telefono').error == true
+              }"
+            />
+            <div
+              *ngIf="ValidarForm('telefono').error"
+              class="invalid-feedback d-block"
+            >
+              {{ ValidarForm("telefono").message }}
+            </div>
+          </div>
+        </div>
+        <div class="col-12 mt-3">
+          <h3>Datos Postales</h3>
+          <div class="col-12 form-group">
+            <label for="">Direccion</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="direccion"
+              [ngClass]="{
+                'is-valid': ValidarForm('direccion').error == false,
+                'is-invalid': ValidarForm('direccion').error == true
+              }"
+            />
+            <div
+              *ngIf="ValidarForm('direccion').error"
+              class="invalid-feedback d-block"
+            >
+              {{ ValidarForm("direccion").message }}
+            </div>
+          </div>
+          <div class="row pl-3 pr-3">
+            <div class="col-3 form-group">
+              <label for="">N°</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="numeroCasa"
+                [ngClass]="{
+                  'is-valid': ValidarForm('numeroCasa').error == false,
+                  'is-invalid': ValidarForm('numeroCasa').error == true
+                }"
+              />
+              <div
+                *ngIf="ValidarForm('numeroCasa').error"
+                class="invalid-feedback d-block"
+              >
+                {{ ValidarForm("numeroCasa").message }}
+              </div>
+            </div>
+            <div class="col-3 form-group">
+              <label for="">Esc</label>
+              <input type="text" class="form-control" />
+            </div>
+            <div class="col-3 form-group">
+              <label for="">Piso</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="piso"
+                [ngClass]="{
+                  'is-valid': ValidarForm('piso').error == false,
+                  'is-invalid': ValidarForm('piso').error == true
+                }"
+              />
+              <div
+                *ngIf="ValidarForm('piso').error"
+                class="invalid-feedback d-block"
+              >
+                {{ ValidarForm("piso").message }}
+              </div>
+            </div>
+            <div class="col-3 form-group">
+              <label for="">Letra</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="letra"
+                [ngClass]="{
+                  'is-valid': ValidarForm('letra').error == false,
+                  'is-invalid': ValidarForm('letra').error == true
+                }"
+              />
+              <div
+                *ngIf="ValidarForm('letra').error"
+                class="invalid-feedback d-block"
+              >
+                {{ ValidarForm("letra").message }}
+              </div>
+            </div>
+          </div>
+          <div class="row pl-3 pr-3">
+            <div class="col-6 form-group">
+              <label for="">CP</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="cp"
+                [ngClass]="{
+                  'is-valid': ValidarForm('cp').error == false,
+                  'is-invalid': ValidarForm('cp').error == true
+                }"
+              />
+              <div
+                *ngIf="ValidarForm('cp').error"
+                class="invalid-feedback d-block"
+              >
+                {{ ValidarForm("cp").message }}
+              </div>
+            </div>
+            <div class="col-6 form-group">
+              <label for="">Localidad</label>
+              <input type="text" class="form-control" />
+            </div>
+          </div>
+          <div class="col-12 form-group">
+            <label for="">Provincia</label>
+            <input type="text" class="form-control" />
+          </div>
+          <div class="col-12 form-group">
+            <label for="">Pais</label>
+            <select
+              name=""
+              id=""
+              class="form-control"
+              formControlName="country"
+              [ngClass]="{
+                'is-valid': ValidarForm('country').error == false,
+                'is-invalid': ValidarForm('country').error == true
+              }"
+            >
+              <option value="null">Selected...</option>
+              <option *ngFor="let country of countriesName" [value]="country">{{
+                country
+              }}</option>
+            </select>
+            <div
+              *ngIf="ValidarForm('country').error"
+              class="invalid-feedback d-block"
+            >
+              {{ ValidarForm("country").message }}
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <div class="col-12">
+        <button
+          type="button"
+          class="btn btn-outline-info btn-block"
+          (click)="GuardarUsuario()"
+        >
+          Guardar Usuario
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
