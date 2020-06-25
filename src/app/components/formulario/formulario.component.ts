@@ -34,17 +34,23 @@ export class FormularioComponent implements OnInit {
 
   public CreateForm() {
     this.formulario = new FormGroup({
-      name: new FormControl(null, [
-        RxwebValidators.required(),
-        RxwebValidators.pattern({
-          expression: { onlyAlpha: /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/ },
-        }),
-        RxwebValidators.minLength({ value: 8 }),
-      ]),
+      name: new FormControl(
+        null,
+        [
+          RxwebValidators.required(),
+          RxwebValidators.pattern({
+            expression: { onlyAlpha: /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/ },
+          }),
+          RxwebValidators.minLength({ value: 8 }),
+        ],
+        this.msgError.VerificarNombreUsuarioNoExista.bind(this)
+      ),
       email: new FormControl(null, [
         RxwebValidators.required(),
         RxwebValidators.email(),
-      ]),
+      ],
+      this.msgError.VerificarCorreoNoExista.bind(this)
+      ),
       password: new FormControl(null, [
         RxwebValidators.required(),
         RxwebValidators.password({
@@ -112,13 +118,16 @@ export class FormularioComponent implements OnInit {
   }
 
   public GuardarUsuario() {
+    console.log(this.formulario);
+    return;
+
     if (!this.formulario.valid) {
       alert('form invalido');
       return;
     }
 
     const Usuario: Usuario = this.formulario.value;
-    console.log(Usuario);
+    // console.log(Usuario);
     this.UserDB.GuardarUsuario(Usuario);
   }
 }

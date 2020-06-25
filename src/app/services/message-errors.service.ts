@@ -1,29 +1,33 @@
 import { Injectable } from '@angular/core';
+import { UserDatabaseService } from './user-database.service';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { ValidationErrors, FormControl } from '@angular/forms';
+import { Usuario } from '../interface/user.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MessageErrorsService {
+  constructor(private UserDB: UserDatabaseService) {}
 
-  constructor() { }
-
-  public messageError(errorRecibido: Object){
+  public messageError(errorRecibido: Object) {
     let message: string = '';
 
-    if(errorRecibido == null){
+    if (errorRecibido == null) {
       return {
-        error: false
+        error: false,
       };
     }
 
-    switch(true){
+    switch (true) {
       case errorRecibido.hasOwnProperty('required'):
         message = 'Es necesario este campo';
         break;
       case errorRecibido.hasOwnProperty('onlyAlpha'):
         message = 'El campo tiene caracteres innecesarios';
         break;
-      case errorRecibido.hasOwnProperty('minLength'): 
+      case errorRecibido.hasOwnProperty('minLength'):
         message = 'No cumple con la longitud requerida';
         break;
       case errorRecibido.hasOwnProperty('email'):
@@ -59,11 +63,51 @@ export class MessageErrorsService {
       case errorRecibido.hasOwnProperty('cp'):
         message = 'El formato de CP no es aceptado';
         break;
+      case errorRecibido.hasOwnProperty('UsuarioExistente'):
+        message = 'El Usuario ya existe, seleccione otro';
+        break;
+      case errorRecibido.hasOwnProperty('CorreoExistente'):
+        message = 'El Correo ya existe, seleccione otro';
+        break;
     }
 
     return {
       message,
-      error: true
-    }
+      error: true,
+    };
   }
+
+  public VerificarNombreUsuarioNoExista(
+    control: FormControl
+  ): Observable<ValidationErrors | null> {
+    return this.UserDB.ObtenerNombreUsuario(control.value).pipe(
+      map((valor) => {
+        if (valor.docs.length > 0) {
+          return {
+            UsuarioExistente: true,
+          };
+        } else {
+          return null;
+        }
+      })
+    );
+  }
+
+  public VerificarCorreoNoExista(
+    control: FormControl
+  ): Observable<ValidationErrors | null> {
+    return this.UserDB.ObtenerCorreo(control.value).pipe(
+      map((valor) => {
+        if (valor.docs.length > 0) {
+          return {
+            CorreoExistente: true,
+          };
+        } else {
+          return null;
+        }
+      })
+    );
+  }
+
+
 }

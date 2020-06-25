@@ -21,6 +21,22 @@ export class UserDatabaseService {
   }
 
   public ObtenerUsuarioActualizar(idUsuario: string) {
-    return this.afs.collection('Usuarios', (ref) => ref.where('id', '==', idUsuario)).valueChanges();
+    return this.afs
+      .collection('Usuarios', (ref) => ref.where('id', '==', idUsuario))
+      .valueChanges();
+  }
+
+  public ObtenerNombreUsuario(nombreUsuario: string) {
+    // console.log('x');
+
+    return this.afs
+      .collection('Usuarios', (ref) => ref.where('name', '==', nombreUsuario))
+      .get();
+  }
+
+  public ObtenerCorreo(correo: string) {
+    return this.afs
+      .collection('Usuarios', (ref) => ref.where('email', '==', correo))
+      .get();
   }
 }
